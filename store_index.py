@@ -8,11 +8,9 @@ from langchain_pinecone import PineconeVectorStore
 load_dotenv()
 
 
-PINECONE_API_KEY=os.environ.get('PINECONE_API_KEY')
-OPENAI_API_KEY=os.environ.get('OPENAI_API_KEY')
-
-os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+PINECONE_API_KEY = os.environ.get("PINECONE_API_KEY")
+if not PINECONE_API_KEY:
+    raise RuntimeError("PINECONE_API_KEY is required. Add it to your .env file.")
 
 
 extracted_data=load_pdf_file(data='data/')
@@ -26,7 +24,7 @@ pc = Pinecone(api_key=pinecone_api_key)
 
 
 
-index_name = "medical-chatbot"  # change if desired
+index_name = os.getenv("PINECONE_INDEX_NAME", "medical-chatbot")
 
 if not pc.has_index(index_name):
     pc.create_index(
