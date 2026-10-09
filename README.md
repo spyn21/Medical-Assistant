@@ -1,4 +1,4 @@
-# Medical Chatbot
+# Medical Assistant
 
 A university project by **Bhukya Naresh**. This Flask web application answers health-related questions using retrieval-augmented generation (RAG): relevant text is retrieved from a medical reference document stored in Pinecone, then an OpenAI model prepares a concise response.
 
